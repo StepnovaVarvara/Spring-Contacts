@@ -1,0 +1,2 @@
+Смирнов Иван Иванович;+89099999991;someEmail@example.example
+Моргунов Петр Александрович;+89099999992;someEmail1@example.example
