@@ -33,12 +33,12 @@ public class Contact {
 //
 //    @SneakyThrows
 //    public void saveToFile() {
-//        PrintWriter printWriter = new PrintWriter("src/main/resources/contact.txt");
+//        PrintWriter printWriter = new PrintWriter("src/main/resources/notebook.txt");
 //        for (Contact contact : contactList) {
 //            printWriter.write(contact.getFullName() + ";" + contact.getPhoneNumber() + ";" + contact.getEmail() + "\n");
 //        }
 //        printWriter.flush();
 //        printWriter.close();
-//        System.out.println("Список контактов сохранен в файл contact.txt");
+//        System.out.println("Список контактов сохранен в файл notebook.txt");
 //    }
 }

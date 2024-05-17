@@ -6,7 +6,9 @@ import org.example.dto.NoteBook;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import java.io.File;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Scanner;
@@ -22,8 +24,32 @@ public class ContactWorker {
     private String phoneRegex;
     @Value("${app.processor.emailRegex}")
     private String emailRegex;
-    @Value("${app.filepath}")
-    private String filePath;
+    @Value("${app.filePath.init}")
+    private String initFile;
+    @Value("${app.filePath.save}")
+    private String saveFile;
+
+    @SneakyThrows
+    public void saveInitContacts() {
+        File file = new File(initFile);
+
+        List<Contact> contactList = new ArrayList<>();
+        Scanner input = new Scanner(file);
+        while (input.hasNext()) {
+            String[] lineToArray = input.nextLine().split(";");
+
+            Contact contact = new Contact()
+                    .setFullName(lineToArray[0])
+                    .setPhoneNumber(lineToArray[1])
+                    .setEmail(lineToArray[2]);
+            contactList.add(contact);
+        }
+
+        NoteBook.setContactList(contactList);
+        input.close();
+    }
+
+
     public void printAllContact() {
         if (NoteBook.getContactList().isEmpty()) {
             System.out.println("Лист контактов пуст");
@@ -122,7 +148,7 @@ public class ContactWorker {
 
     @SneakyThrows
     public void saveContactsToFile() {
-        PrintWriter printWriter = new PrintWriter("src/main/resources/contact.txt"); //TODO если через Value, то не сохраняет в файл
+        PrintWriter printWriter = new PrintWriter(saveFile); //TODO если через Value, то не сохраняет в файл
         for (Contact contact : NoteBook.getContactList()) {
             printWriter.write(contact.getFullName() + ";" +
                     contact.getPhoneNumber() + ";" +
@@ -132,6 +158,6 @@ public class ContactWorker {
         printWriter.flush();
         printWriter.close();
 
-        System.out.println("Список контактов сохранен в файл contact.txt");
+        System.out.println("Список контактов сохранен в файл notebook.txt");
     }
 }

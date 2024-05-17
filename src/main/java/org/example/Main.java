@@ -2,7 +2,6 @@ package org.example;
 
 import lombok.SneakyThrows;
 import org.example.config.AppConfig;
-import org.example.env.ProfileWorker;
 import org.example.processor.ContactWorker;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -14,7 +13,7 @@ public class Main {
     @SneakyThrows
     public static void main(String[] args) {
         ApplicationContext context = new AnnotationConfigApplicationContext(AppConfig.class);
-        context.getBean(ProfileWorker.class).setup();
+        context.getBean(ContactWorker.class);
         startWorking(context);
     }
 
