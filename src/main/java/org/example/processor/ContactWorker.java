@@ -148,7 +148,7 @@ public class ContactWorker {
 
     @SneakyThrows
     public void saveContactsToFile() {
-        PrintWriter printWriter = new PrintWriter(saveFile); //TODO если через Value, то не сохраняет в файл
+        PrintWriter printWriter = new PrintWriter(saveFile);
         for (Contact contact : NoteBook.getContactList()) {
             printWriter.write(contact.getFullName() + ";" +
                     contact.getPhoneNumber() + ";" +
